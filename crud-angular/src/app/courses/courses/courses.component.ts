@@ -15,7 +15,7 @@ import { CoursesService } from '../services/courses.service';
 export class CoursesComponent implements OnInit {
 
   courses$: Observable<Course[]>;//$ - padrao para observables
-  displayedColumns = ['name', 'category'];
+  displayedColumns = ['id', 'name', 'category'];
 
   constructor(
     private coursesService: CoursesService,
