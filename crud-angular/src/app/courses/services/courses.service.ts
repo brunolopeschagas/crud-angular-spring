@@ -15,8 +15,12 @@ export class CoursesService {
 
   list() {
     return this.httpClient.get<Course[]>(this.API)
-    .pipe(
-      first()
-    );
+      .pipe(
+        first()
+      );
+  }
+
+  save(course: Course) {
+    return this.httpClient.post<Course>(this.API, course);
   }
 }
