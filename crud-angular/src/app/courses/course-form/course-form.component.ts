@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -14,23 +15,32 @@ export class CourseFormComponent implements OnInit {
     this.service.save(this.form.value)
       .subscribe(
         {
-          next: (result) => { console.log(result) },
+          next: (result) => { this.onSuccess() },
           error: (erro) => { this.onError() }
         }
       );
   }
 
+  private onSuccess() {
+    this._snackBar.open('Curso salvo', '', { duration: 5000 });
+    this.location.back();
+  }
+
   private onError() {
-    this._snackBar.open('Erro ao salvar curso', '', { duration: 5000 })
+    this._snackBar.open('Erro ao salvar curso', '', { duration: 5000 });
   }
 
   onCancel() {
-    throw new Error('Method not implemented.');
+    this.location.back();
   }
 
   form: FormGroup; //mesma variavel do course-form.component.html
 
-  constructor(private formBuilder: FormBuilder, private service: CoursesService, private _snackBar: MatSnackBar) {
+  constructor(private formBuilder: FormBuilder,
+    private service: CoursesService,
+    private _snackBar: MatSnackBar,
+    private location: Location) {
+
     this.form = this.formBuilder.group({
       name: [null], //mesma variavel do course-form.component.html
       category: [null]//mesma variavel do course-form.component.html
