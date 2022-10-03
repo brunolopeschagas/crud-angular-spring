@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CoursesService } from '../services/courses.service';
 
@@ -34,9 +34,9 @@ export class CourseFormComponent implements OnInit {
     this.location.back();
   }
 
-  form: FormGroup; //mesma variavel do course-form.component.html
+  form: UntypedFormGroup; //mesma variavel do course-form.component.html
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(private formBuilder: UntypedFormBuilder,
     private service: CoursesService,
     private _snackBar: MatSnackBar,
     private location: Location) {
