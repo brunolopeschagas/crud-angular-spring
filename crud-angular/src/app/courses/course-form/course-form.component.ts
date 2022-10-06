@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
+import { NonNullableFormBuilder } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CoursesService } from '../services/courses.service';
 
@@ -10,6 +10,20 @@ import { CoursesService } from '../services/courses.service';
   styleUrls: ['./course-form.component.scss']
 })
 export class CourseFormComponent implements OnInit {
+
+  form = this.formBuilder.group({
+    name: ['', ], //mesma variavel do course-form.component.html
+    category: ['']//mesma variavel do course-form.component.html
+  });
+
+  constructor(private formBuilder: NonNullableFormBuilder,
+    private service: CoursesService,
+    private _snackBar: MatSnackBar,
+    private location: Location) {
+  }
+  
+  ngOnInit(): void {
+  }
 
   onSubmit() {
     this.service.save(this.form.value)
@@ -32,22 +46,6 @@ export class CourseFormComponent implements OnInit {
 
   onCancel() {
     this.location.back();
-  }
-
-  form: UntypedFormGroup; //mesma variavel do course-form.component.html
-
-  constructor(private formBuilder: UntypedFormBuilder,
-    private service: CoursesService,
-    private _snackBar: MatSnackBar,
-    private location: Location) {
-
-    this.form = this.formBuilder.group({
-      name: [null], //mesma variavel do course-form.component.html
-      category: [null]//mesma variavel do course-form.component.html
-    });
-  }
-
-  ngOnInit(): void {
   }
 
 }
