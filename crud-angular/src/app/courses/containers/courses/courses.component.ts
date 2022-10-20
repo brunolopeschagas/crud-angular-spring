@@ -5,8 +5,8 @@ import { catchError, of } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
 import { ErrorDialogComponent } from 'src/app/shared/components/error-dialog/error-dialog.component';
 
-import { Course } from '../models/course';
-import { CoursesService } from '../services/courses.service';
+import { Course } from '../../models/course';
+import { CoursesService } from '../../services/courses.service';
 
 @Component({
   selector: 'app-courses',
@@ -16,7 +16,7 @@ import { CoursesService } from '../services/courses.service';
 export class CoursesComponent implements OnInit {
 
   courses$: Observable<Course[]>;//$ - padrao para observables
- 
+
   constructor(
     private coursesService: CoursesService,
     private dialog: MatDialog,
@@ -32,9 +32,12 @@ export class CoursesComponent implements OnInit {
       );
   }
 
+  ngOnInit(): void {
+  }
+
   onAdd() {
     // this.router.navigate(['courses/new']);
-    this.router.navigate(['new'], {relativeTo: this.activatedRoute});
+    this.router.navigate(['new'], { relativeTo: this.activatedRoute });
   }
 
   onError(errorMsg: string) {
@@ -42,8 +45,4 @@ export class CoursesComponent implements OnInit {
       data: errorMsg
     });
   }
-
-  ngOnInit(): void {
-  }
-
 }
