@@ -14,6 +14,7 @@ import { CoursesService } from '../../services/courses.service';
 export class CourseFormComponent implements OnInit {
 
   form = this.formBuilder.group({
+    _id: [''],
     name: ['',], //mesma variavel do course-form.component.html
     category: ['']//mesma variavel do course-form.component.html
   });
@@ -28,6 +29,7 @@ export class CourseFormComponent implements OnInit {
   ngOnInit(): void {
     const course: Course = this.route.snapshot.data['course'];
     this.form.setValue({
+      _id: course._id,
       name: course.name,
       category: course.category
     })
