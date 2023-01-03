@@ -20,11 +20,22 @@ export class CoursesService {
       );
   }
 
-  loadById(id: string){
-    this.httpClient.get<Course>('${this.AP}/${id}');
+  loadById(id: string) {
+    return this.httpClient.get<Course>('${this.AP}/${id}');
   }
 
   save(course: Partial<Course>) {
+    if (course._id) {
+      return this.update(course);
+    }
+    return this.create(course);
+  }
+
+  private create(course: Partial<Course>) {
     return this.httpClient.post<Course>(this.API, course);
+  }
+
+  private update(course: Partial<Course>) {
+    return this.httpClient.put<Course>('${this.AP}/${course._id}', course);
   }
 }
